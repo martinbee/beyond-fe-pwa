@@ -1,9 +1,13 @@
+import dotenv from 'dotenv';
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './index.css';
-import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+if (process.env.NODE_ENV !== 'production') dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>
