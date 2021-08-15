@@ -1,14 +1,12 @@
+import * as React from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
-// import { MainLayout } from '@/components/Layout';
-// import { Landing, Dashboard } from '@/features/misc';
-// import { Profile, Users } from '@/features/users';
+import { Dashboard } from '../features/dashboard';
+import { History } from '../features/history';
+import { Settings } from '../features/settings';
+import { WorkoutsRoutes } from '../features/workouts';
 
-const Dashboard = () => <div>Dashboard</div>;
-const Landing = () => <div>Landing</div>;
-const Profile = () => <div>Landing</div>;
-const Users = () => <div>Landing</div>;
-const MainLayout = ({ children }) => <div>{children}</div>;
+const MainLayout = ({ children }: { children: React.ReactNode }) => <div>{children}</div>;
 
 const App = () => {
   return (
@@ -21,13 +19,13 @@ const App = () => {
 const ProtectedRoutes = () => {
   return (
     <Routes>
-      <Route path="/app" element={<App />}>
-        <Route path="/users/*" element={<Users />} />
-        <Route path="/profile" element={<Profile />} />
+      <Route path="/" element={<App />}>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/workouts/*" element={<WorkoutsRoutes />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
-      <Route path="/" element={<Landing />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

@@ -7,11 +7,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 // import { AuthProvider } from 'lib/auth';
 
+type ErrorFallbackProps = {
+  error: Error;
+  resetErrorBoundary: () => void;
+};
 type AppProviderProps = {
   children: React.ReactNode;
 };
 
-const ErrorFallback = ({ error, resetErrorBoundary }) => (
+const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps) => (
   <div role="alert">
     <h2>Ooops, something went wrong :( </h2>
     <pre>{error.message}</pre>
