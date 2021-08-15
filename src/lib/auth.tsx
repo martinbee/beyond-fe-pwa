@@ -1,3 +1,5 @@
+import { useQuery, gql } from '@apollo/client';
+
 // import { initReactQueryAuth } from 'react-query-auth';
 
 // import { Spinner } from '@/components/Elements';
@@ -64,11 +66,56 @@
 //   RegisterCredentials
 // >(authConfig);
 
-// set up in future
+// paginate
+// history {
+//   coreSets {
+//     completed
+//     reps
+//     weight
+//   }
+//   didFirstSetLast
+//   didWarmUp
+//   id
+//   liftType
+//   jokerSets {
+//     completed
+//     reps
+//     weight
+//   }
+// }
+
+const GET_USER = gql`
+  query GetUser($id: ID!) {
+    user(id: $id) {
+      activeWorkout {
+        id
+        liftType
+      }
+      id
+      firstName
+      lastName
+      trainingMaxes {
+        BENCH
+        PRESS
+        SQUAT
+        DEADLIFT
+      }
+      week
+    }
+  }
+`;
+
+// come from token
+const userId = '600df968be16b202184159e5';
+
 export const useAuth = () => {
+  const { data, loading } = useQuery(GET_USER, {
+    variables: { id: userId },
+  });
+  console.log(data?.user);
+
   return {
-    user: {
-      id: '600df968be16b202184159e5',
-    },
+    loading,
+    user: data ? data.user : null,
   };
 };
