@@ -1,50 +1,19 @@
-import { Card, CardContent, IconButton, Typography } from '@material-ui/core';
-import Settings from '@material-ui/icons/Settings';
+import { Button, Card, CardContent, Typography } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { useAuth } from '../../../lib/auth';
+import { BoldText } from '../../../components/BoldText';
+import { Space } from '../../../components/Space';
 
-// const CREATE_WORKOUT = gql`
-//   mutation CreateWorkout($input: CreateWorkoutInput!) {
-//     createWorkout(input: $input) {
-//       workout {
-//         id
-//         user {
-//           activeWorkout {
-//             id
-//             liftType
-//           }
-//           id
-//           week
-//         }
-//       }
-//     }
-//   }
-// `;
+const FullWidthButton = styled(Button)`
+  width: 100%;
+`;
 
-// const COMPLETE_WORKOUT = gql`
-//   mutation CompleteWorkout($input: CompleteWorkoutInput!) {
-//     completeWorkout(input: $input) {
-//       workout {
-//         id
-//         user {
-//           activeWorkout {
-//             id
-//             liftType
-//           }
-//           id
-//           week
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// could take props instead
 export const UserInfoCard = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { trainingMaxes } = user;
+  const { trainingMaxes, week } = user;
 
   const goToSettings = () => {
     navigate('../settings');
@@ -53,15 +22,23 @@ export const UserInfoCard = () => {
   return (
     <Card>
       <CardContent>
-        <IconButton onClick={goToSettings}>
-          <Settings />
-        </IconButton>
-        <div>
-          <Typography>Press: {trainingMaxes.PRESS}</Typography>
-          <Typography>Squat: {trainingMaxes.SQUAT}</Typography>
-          <Typography>Bench: {trainingMaxes.BENCH}</Typography>
-          <Typography>Deadlift: {trainingMaxes.DEADLIFT}</Typography>
-        </div>
+        <Space size="small">
+          <Typography variant="h6">User Info:</Typography>
+          <Space size="xsmall" horizontal>
+            <BoldText>Current Week:</BoldText>
+            <Typography>{week}</Typography>
+          </Space>
+          <Space size="xsmall">
+            <BoldText>Training Maxes</BoldText>
+            <Typography>Press: {trainingMaxes.PRESS}</Typography>
+            <Typography>Squat: {trainingMaxes.SQUAT}</Typography>
+            <Typography>Bench: {trainingMaxes.BENCH}</Typography>
+            <Typography>Deadlift: {trainingMaxes.DEADLIFT}</Typography>
+          </Space>
+          <FullWidthButton color="primary" onClick={goToSettings} variant="contained">
+            Go To Settings
+          </FullWidthButton>
+        </Space>
       </CardContent>
     </Card>
   );

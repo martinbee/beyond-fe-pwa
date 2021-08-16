@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { StylesProvider } from '@material-ui/core/styles';
 
 // import { AuthProvider } from 'lib/auth';
 
@@ -40,7 +41,9 @@ const AppProvider = ({ children }: AppProviderProps) => (
   >
     <ErrorBoundary FallbackComponent={ErrorFallback} onReset={reloadApp}>
       <ApolloProvider client={apolloClient}>
-        <Router>{children}</Router>
+        <StylesProvider injectFirst>
+          <Router>{children}</Router>
+        </StylesProvider>
       </ApolloProvider>
     </ErrorBoundary>
   </React.Suspense>

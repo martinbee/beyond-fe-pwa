@@ -5,8 +5,8 @@ export const Dashboard = () => {
   return (
     <Space>
       <ActiveWorkoutCard />
-      <HistoryCard />
       <UserInfoCard />
+      <HistoryCard />
     </Space>
   );
 };

@@ -66,30 +66,29 @@ import { useQuery, gql } from '@apollo/client';
 //   RegisterCredentials
 // >(authConfig);
 
-// paginate
-// history {
-//   coreSets {
-//     completed
-//     reps
-//     weight
-//   }
-//   didFirstSetLast
-//   didWarmUp
-//   id
-//   liftType
-//   jokerSets {
-//     completed
-//     reps
-//     weight
-//   }
-// }
-
+// paginate history
 const GET_USER = gql`
   query GetUser($id: ID!) {
     user(id: $id) {
       activeWorkout {
         id
         liftType
+      }
+      history {
+        coreSets {
+          completed
+          reps
+          weight
+        }
+        didFirstSetLast
+        didWarmUp
+        id
+        liftType
+        jokerSets {
+          completed
+          reps
+          weight
+        }
       }
       id
       firstName
